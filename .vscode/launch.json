@@ -2,16 +2,15 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "Your own server",
             "type": "al",
             "request": "launch",
-            "name": "Your own server",
-            "server": "http://localhost",
-            "serverInstance": "BC130",
+            "server": "http://bcusinside",
+            "serverInstance": "BC",
             "authentication": "Windows",
             "breakOnError": true,
-            "launchBrowser": true,
-            "enableLongRunningSqlStatements": true,
-            "enableSqlInformationDebugger": true
+            "breakOnRecordWrite": false,
+            "launchBrowser": true
         }
     ]
 }

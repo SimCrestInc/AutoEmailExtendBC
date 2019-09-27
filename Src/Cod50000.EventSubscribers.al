@@ -40,9 +40,9 @@ codeunit 50000 "Event Subscribers"
         // Get RecRef for Purchase Quote. Get Merge Fields
         if DocType = DocType::PurchaseQuote then begin
             with PurchHeader do begin
-                Get("Document Type"::Quote, "No.");
+                Get("Document Type"::Quote, AutoEmailLog."Document No.");
                 SetRange("Document Type", "Document Type"::Quote);
-                SetRange("No.", "No.");
+                SetRange("No.", AutoEmailLog."Document No.");
                 RecRef.GETTABLE(PurchHeader);
                 MergeField1 := "No.";
                 MergeField2 := "Buy-from Vendor Name";
