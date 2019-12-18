@@ -3,9 +3,9 @@ codeunit 50000 "Event Subscribers"
     [EventSubscriber(ObjectType::Codeunit, Codeunit::"SIMC AEM Log Email Meth", 'OnBeforeLogSpecialDocType', '', true, true)]
     local procedure OnBeforeLogSpecialDocType(DocType: Enum "SIMC AEM Document Type";
                                               var DocNo: code[20];
-                                              var EmailTo: Text[100];
-                                              var ccEmailTo: Text[100];
-                                              var bccEmailTo: Text[100];
+                                              var EmailTo: Text;
+                                              var ccEmailTo: Text;
+                                              var bccEmailTo: Text;
                                               var TriggerError: Boolean;
                                               var EmailTemplate: Record "SIMC AEM Email Template";
                                               var AutoEmailLog: Record "SIMC Auto Email Log");
@@ -20,7 +20,7 @@ codeunit 50000 "Event Subscribers"
             PurchHeader.GET(PurchHeader."Document Type"::Quote, DocNo);
             Vendor.Get(PurchHeader."Buy-from Vendor No.");
             EmailTo := Vendor."SIMC Email To";
-            EmailTemplate.Get('PURCHQUOTE');
+            EmailTemplate.Get(GetDefaultTemplate(DocType));
             AutoEmailLog."Email Template" := EmailTemplate.Code;
             AutoEmailLog.Subject := StrSubstNo(EmailTemplate."Email Subject", DocNo);
         end;
@@ -48,5 +48,19 @@ codeunit 50000 "Event Subscribers"
                 MergeField2 := "Buy-from Vendor Name";
             end;
         END;
+    end;
+
+    local procedure GetDefaultTemplate(DocType: Enum "SIMC AEM Document Type"): Code[20]
+    var
+        EmailTemplate: Record "SIMC AEM Email Template";
+        TemplateNotExistErrLbl: label 'Default Email Template for %1 does not exist';
+    begin
+        with EmailTemplate do begin
+            SetRange("Document Type", DocType);
+            SetRange(Default, true);
+            if not FindSet() then
+                Error(TemplateNotExistErrLbl, DocType);
+            Exit(Code);
+        end;
     end;
 }
