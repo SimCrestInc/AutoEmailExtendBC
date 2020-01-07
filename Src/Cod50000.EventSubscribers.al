@@ -15,11 +15,13 @@ codeunit 50000 "Event Subscribers"
         Vendor: Record Vendor;
     begin
         // We need to catch all custom document types
-        // Here we get all relevant information for the puchase invoice to be logged.
+        // Here we get all relevant information for the puchase quote to be logged.
         if DocType = DocType::PurchaseQuote then begin
             PurchHeader.GET(PurchHeader."Document Type"::Quote, DocNo);
             Vendor.Get(PurchHeader."Buy-from Vendor No.");
             EmailTo := Vendor."SIMC Email To";
+            ccEmailTo := Vendor."SIMC ccEmail To";
+            bccEmailTo := Vendor."SIMC bccEmail To";
             EmailTemplate.Get(GetDefaultTemplate(DocType));
             AutoEmailLog."Email Template" := EmailTemplate.Code;
             AutoEmailLog.Subject := StrSubstNo(EmailTemplate."Email Subject", DocNo);
