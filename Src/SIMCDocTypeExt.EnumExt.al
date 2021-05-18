@@ -1,4 +1,4 @@
-enumextension 50000 "DocTypeExt" extends "SIMC AEM Document Type"
+enumextension 50000 "SIMC DocTypeExt" extends "SIMC AEM Document Type"
 {
     value(50000; PurchaseQuote)
     {

@@ -1,4 +1,4 @@
-codeunit 50000 "Event Subscribers"
+codeunit 50000 "SIMC Event Subscribers"
 {
     [EventSubscriber(ObjectType::Codeunit, Codeunit::"SIMC AEM Log Email Meth", 'OnBeforeLogSpecialDocType', '', true, true)]
     local procedure OnBeforeLogSpecialDocType(DocType: Enum "SIMC AEM Document Type";

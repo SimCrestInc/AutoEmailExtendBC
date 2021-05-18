@@ -1,4 +1,4 @@
-pageextension 50000 "Purchase Quote Ext" extends "Purchase Quote"
+pageextension 50000 "SIMC Purchase Quote Ext" extends "Purchase Quote"
 {
     actions
     {
