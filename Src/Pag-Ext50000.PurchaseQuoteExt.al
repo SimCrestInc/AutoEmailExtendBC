@@ -1,11 +1,11 @@
-pageextension 50000 "Purchase Quote Ext" extends "Purchase Quote" // 49
+pageextension 50000 "Purchase Quote Ext" extends "Purchase Quote"
 {
     actions
     {
         // Add changes to page actions here
         addfirst(Processing)
         {
-            action("Email Purchase Quote")
+            action("SIMC Email Purchase Quote")
             {
                 Caption = 'Email Purchase Quote';
                 ApplicationArea = All;
@@ -15,10 +15,10 @@ pageextension 50000 "Purchase Quote Ext" extends "Purchase Quote" // 49
 
                 trigger OnAction();
                 begin
-                    LogEmail.LogEmail(DocType::PurchaseQuote, "No.", true, true);
+                    SIMCLogEmail.LogEmail(SIMCDocType::PurchaseQuote, "No.", true, true);
                 end;
             }
-            action("Show Email Log")
+            action("SIMC Show Email Log")
             {
                 Caption = 'Show Email Log';
                 ApplicationArea = All;
@@ -28,13 +28,13 @@ pageextension 50000 "Purchase Quote Ext" extends "Purchase Quote" // 49
 
                 trigger OnAction();
                 begin
-                    LogEmail.ShowEmailLog(DocType::PurchaseQuote, "No.");
+                    SIMCLogEmail.ShowEmailLog(SIMCDocType::PurchaseQuote, "No.");
                 end;
             }
         }
     }
 
     var
-        LogEmail: Codeunit "SIMC AEM Log Email Meth";
-        DocType: Enum "SIMC AEM Document Type";
+        SIMCLogEmail: Codeunit "SIMC AEM Log Email Meth";
+        SIMCDocType: Enum "SIMC AEM Document Type";
 }

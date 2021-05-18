@@ -11,7 +11,6 @@ codeunit 50000 "Event Subscribers"
                                               var AutoEmailLog: Record "SIMC Auto Email Log";
                                               var MergeField1: Text;
                                               var MergeField2: Text);
-
     var
         PurchHeader: Record "Purchase Header";
         Vendor: Record Vendor;
@@ -32,24 +31,6 @@ codeunit 50000 "Event Subscribers"
         end;
     end;
 
-    [EventSubscriber(ObjectType::Codeunit, Codeunit::"SIMC AEM Create and Mail Meth", 'OnBeforeCustomDocEmailed', '', true, true)]
-    local procedure OnProcessDocument(DocType: Enum "SIMC AEM Document Type";
-                                        var RecRef: RecordRef;
-                                        var AutoEmailLog: Record "SIMC Auto Email Log";
-                                        var EmailTemplate: Record "SIMC AEM Email Template";
-                                        var DocumentName: Text)
-    var
-        PurchHeader: Record "Purchase Header";
-    begin
-        // Get RecRef for Purchase Quote. Get Merge Fields
-        if DocType = DocType::PurchaseQuote then begin
-            PurchHeader.Get(PurchHeader."Document Type"::Quote, AutoEmailLog."Document No.");
-            PurchHeader.SetRange("Document Type", PurchHeader."Document Type"::Quote);
-            PurchHeader.SetRange("No.", AutoEmailLog."Document No.");
-            RecRef.GETTABLE(PurchHeader);
-        end;
-    end;
-
     local procedure GetDefaultTemplate(DocType: Enum "SIMC AEM Document Type"): Code[20]
     var
         EmailTemplate: Record "SIMC AEM Email Template";
@@ -60,5 +41,23 @@ codeunit 50000 "Event Subscribers"
         if not EmailTemplate.FindSet() then
             Error(TemplateNotExistErrLbl, DocType);
         Exit(EmailTemplate.Code);
+    end;
+
+    [EventSubscriber(ObjectType::Codeunit, Codeunit::"SIMC AEM Create and Mail Meth", 'OnBeforeCustomDocEmailed', '', true, true)]
+    local procedure OnProcessDocument(DocType: Enum "SIMC AEM Document Type";
+                                        var RecRef: RecordRef;
+                                        var AutoEmailLog: Record "SIMC Auto Email Log";
+                                        var EmailTemplate: Record "SIMC AEM Email Template";
+                                        var DocumentName: Text)
+    var
+        PurchHeader: Record "Purchase Header";
+    begin
+        // Get RecRef for Purchase Quote
+        if DocType = DocType::PurchaseQuote then begin
+            PurchHeader.Get(PurchHeader."Document Type"::Quote, AutoEmailLog."Document No.");
+            PurchHeader.SetRange("Document Type", PurchHeader."Document Type"::Quote);
+            PurchHeader.SetRange("No.", AutoEmailLog."Document No.");
+            RecRef.GETTABLE(PurchHeader);
+        end;
     end;
 }
