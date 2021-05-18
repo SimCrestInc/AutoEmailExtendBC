@@ -15,7 +15,7 @@ pageextension 50000 "Purchase Quote Ext" extends "Purchase Quote" // 49
 
                 trigger OnAction();
                 begin
-                    LogEmail.LogEmail(DocType::PurchaseQuote, "No.", TRUE);
+                    LogEmail.LogEmail(DocType::PurchaseQuote, "No.", true, true);
                 end;
             }
             action("Show Email Log")

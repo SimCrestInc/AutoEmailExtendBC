@@ -1,6 +1,6 @@
 {
   "id": "f94b209c-2878-4375-a32f-a51bb60673f6",
-  "name": "AutoEmailExtendedBC15",
+  "name": "AutoEmailExtended",
   "publisher": "SimCrest",
   "version": "1.0.0.0",
   "brief": "",
@@ -11,34 +11,23 @@
   "url": "",
   "logo": "",
   "dependencies": [
-    {
-      "appId": "63ca2fa4-4f03-4f2b-a480-172fef340d3f",
-      "publisher": "Microsoft",
-      "name": "System Application",
-      "version": "1.0.0.0"
-    },
-    {
-      "appId": "437dbf0e-84ff-417a-965d-ed2bb9650972",
-      "publisher": "Microsoft",
-      "name": "Base Application",
-      "version": "15.0.0.0"
-    },
-    {
-      "appId": "1c9f9809-0e2b-40c9-905b-51916c86f167",
+      {
+      "id": "1c9f9809-0e2b-40c9-905b-51916c86f167",
       "name": "Auto Email",
       "publisher": "SimCrest",
-      "version": "2.0.0.0"
+      "version": "18.0.0.0"
     }
   ],
   "screenshots": [],
-  "platform": "15.0.0.0",
+  "platform": "17.0.0.0",
+  "application": "17.0.0.0",
   "idRanges": [
     {
       "from": 50000,
       "to": 50149
     }
   ],
-  "contextSensitiveHelpUrl": "https://AutoEmailExtendedBC15.com/help/",
+  "contextSensitiveHelpUrl": "https://AutoEmailExtended.com/help/",
   "showMyCode": true,
-  "runtime": "4.0"
+  "runtime": "5.0"
 }
