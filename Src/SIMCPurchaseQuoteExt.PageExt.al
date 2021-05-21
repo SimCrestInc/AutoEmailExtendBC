@@ -2,9 +2,9 @@ pageextension 50000 "SIMC Purchase Quote Ext" extends "Purchase Quote"
 {
     actions
     {
-        // Add changes to page actions here
         addfirst(Processing)
         {
+            // This will create the button to email the purchase quote
             action("SIMC Email Purchase Quote")
             {
                 Caption = 'Email Purchase Quote';
@@ -18,6 +18,7 @@ pageextension 50000 "SIMC Purchase Quote Ext" extends "Purchase Quote"
                     SIMCLogEmail.LogEmail(SIMCDocType::PurchaseQuote, "No.", true, true);
                 end;
             }
+            // This will add a button to show the entries in the email log that have been submitted for this purchase quote
             action("SIMC Show Email Log")
             {
                 Caption = 'Show Email Log';
